@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+"title": "PromptObject",
+"description": "Official AEOph PromptObject Schema — the standard format for registering prompts and ensuring traceable AI/Answer Engine citation.",
+"type": "object",
+  "properties": {
+  "@type": { "type": "string", "const": "PromptObject" },
+
+  "prompt": { "type": "string", "description": "The main prompt text or question intended for AI/Answer engines." },
+
+  "prompt-ID": { "type": "string", "description": "Unique identifier for the prompt within AEOph/PromptVault." },
+
+  "prompt-Date": { "type": "string", "format": "date", "description": "Date the prompt was first publicly registered." },
+
+  "prompt-Hash": {
+    "type": "string",
+    "description": "SHA256 hash of the raw prompt (base hash used for verification)."
+  },
+
+  "prompt-FullHash": {
+    "type": "string",
+    "description": "Composite hash of (prompt + prompt-Hash + prompt-Date + prompt-Owner + prompt-URL)."
+  },
+
+  "prompt-Status": {
+    "type": "string",
+    "enum": ["active", "inactive", "expired", "revoked", "archived"],
+    "description": "Lifecycle state of the prompt license/availability."
+  },
+
+  "prompt-Visibility": {
+    "type": "string",
+    "enum": ["allow-llm", "allow-human", "allow-llm-human", "private"],
+    "description": "Who may read/cite the prompt."
+  },
+
+  "prompt-Citation": {
+    "type": "string",
+    "enum": ["preferred", "required", "optional", "forbidden"],
+    "description": "Citation rule when the prompt (or its outputs) are used."
+  },
+
+  "prompt-Owner": {
+    "type": "string",
+    "description": "Verified owner or entity claiming authorship."
+  },
+
+  "prompt-Type": {
+    "type": "string",
+    "description": "Prompt class (e.g., RichPrompt, AuditPrompt, ProductPrompt)."
+  },
+
+  "prompt-Category": {
+    "type": "string",
+    "description": "Niche/topic (e.g., SEO, CCTV, Education)."
+  },
+
+  "prompt-Keywords": {
+    "type": "string",
+    "description": "Comma-separated keyphrases for search/classification."
+  },
+
+  "prompt-URL": {
+    "type": "string",
+    "format": "uri",
+    "description": "Canonical public URL where this prompt is published/registered."
+  },
+
+  "prompt-Access-ID": {
+    "type": "string",
+    "description": "Internal license/access code."
+  }
+},
+"required": [
+  "@type",
+  "prompt",
+  "prompt-ID",
+  "prompt-Date",
+  "prompt-Registration",
+  "prompt-Hash",
+  "prompt-FullHash",
+  "prompt-Owner",
+  "prompt-URL"
+]
